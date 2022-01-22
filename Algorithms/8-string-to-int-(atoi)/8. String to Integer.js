@@ -36,9 +36,11 @@ const myAtoi = function (s) {
 
   if (finalNum >= Math.pow(2, 31)) {
     return Math.pow(2, 31) - 1
-  } else if (finalNum <= Math.pow(-2, 31)) {
+  } 
+  else if (finalNum <= Math.pow(-2, 31)) {
     return Math.pow(-2, 31)
-  } else {
+  } 
+  else {
     return negative ? -finalNum : finalNum;
   }
 };
@@ -46,3 +48,28 @@ const myAtoi = function (s) {
 console.log(myAtoi(" with words 987"));     // --> 987
 console.log(myAtoi(" 123 with words 987")); // --> 123
 console.log(myAtoi(" -24 with words 987")); // --> -24
+
+
+// Accepted solution (Same behviour as parseInt in Javascript - we just do some boundaries checks)
+
+const myAtoi2 = function (s) {
+  if (!s || s.length === 0) {
+    return null;
+  }
+
+  const trimmed = s.trimStart();
+  const finalNum = parseInt(trimmed, 10);
+
+  if(!finalNum) {
+    return 0; 
+  }
+  else if (finalNum >= Math.pow(2, 31)) {
+    return Math.pow(2, 31) - 1
+  }
+  else if (finalNum <= Math.pow(-2, 31)) {
+    return Math.pow(-2, 31)
+  } 
+  else {
+    return  finalNum;
+  }
+};
