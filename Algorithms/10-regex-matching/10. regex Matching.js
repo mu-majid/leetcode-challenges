@@ -4,54 +4,58 @@
  * @return {boolean}
  */
 
-// This is  a Dyn. Prog. problem (could also be solved wwith recursion)
-/**
- * CONDITIONs: 
-  1, If p.charAt(j) == s.charAt(i) :  dp[i][j] = dp[i-1][j-1];
-  2, If p.charAt(j) == '.' : dp[i][j] = dp[i-1][j-1];
-  3, If p.charAt(j) == '*': 
-    here are two sub conditions:
-      1   if p.charAt(j-1) != s.charAt(i) : dp[i][j] = dp[i][j-2]  //in this case, a* only counts as empty
-      2   if p.charAt(i-1) == s.charAt(i) or p.charAt(i-1) == '.':
-            dp[i][j] = dp[i-1][j]    //in this case, a* counts as multiple a 
-          or dp[i][j] = dp[i][j-1]   // in this case, a* counts as single a
-          or dp[i][j] = dp[i][j-2]   // in this case, a* counts as empty
- */
+// Top Down Memoization
+// O(n * m) -> n = s.length, m = p.length
 const isMatch = function (s, p) {
-  const dp = new Array(s.length + 1).fill(
-    new Array(p.length + 1)
-  );
-
-  // Empty string and Empty pattern
-  dp[0][0] = true;
-  // Handling patterns like a*, a*b*, ...
-  for (let i = 1; i < dp[0].length; i++) {
-    if (p[i - 1] === '*') {
-      if (dp[0][i - 1] || (i > 1 && dp[0][i - 2])) {
-        dp[0][i] = true;
-      }
+  const cache = new WeakMap();
+  
+  const dfs = (i, j) => {
+    let key = [i, j]; // because Map keys comparison is eval by === we need to keep reference to the key
+    
+    // Check if we already visited i, j
+    if (cache.has(key)) {
+      return cache.get(key); 
     }
-  }
 
-  // Top-Down Approach DP
-  for (let i = 0; i < s.length; i++) {
-
-    for (let j = 0; j < p.length; j++) {
-
-      if (p[j] === '.' || s[i] === p[j]) {
-        dp[i + 1][j + 1] = dp[i][j];
-      }
-
-      if (p[j] === '*') {
-        if (p[j - 1] != s[i] && p[j - 1] !== '.') {
-          dp[i + 1][j + 1] = dp[i + 1][j - 1];
-        } else {
-          dp[i + 1][j + 1] = (dp[i + 1][j] || dp[i][j + 1] || dp[i + 1][j - 1]);
-        }
-      }
-
+    // Base Case
+    // 1. If both string and pattern indexes are out of bound -> means perfect match
+    if (i >= s.length && j >= p.length) {
+      return true;
     }
-  }
+    // 2. If pattern index is out of boumd -> means we still have string to be parsed and no match
+    if (j >= p.length) {
+      return false;
+    }
 
-  return dp[s.length][p.length];
+    // If we get here -> i, j are both in bound or i is out of bound but we still have to parse the pattern
+
+    // if the current chars match each other in str and pattern
+    charsMatch = i < s.length && (s[i] === p[j] || p[j] === '.');
+
+    // j in bound and p[j] is followed by *
+    // This means we have a decision tree (use *) (don't use *)
+    if ((j + 1) < p.length && p[j + 1] === '*') { 
+      dontUseStar = dfs(i, j + 2); // means treat char* as 0
+      useStar = charsMatch && dfs(i + 1, j); // means treat char* as 1 or more
+
+      cache.set(key, dontUseStar || useStar);
+
+      return cache.get(key);
+    }
+
+    if (charsMatch) {
+      cache.set(key, dfs(i + 1, j + 1));
+
+      return cache.get(key); 
+    }
+
+    // No matches and No '*'
+    cache.set(key, false);
+
+    return false;
+  }
+  
+  return dfs(0, 0);
 };
+
+console.log(isMatch("aab", "c*a*b"));
