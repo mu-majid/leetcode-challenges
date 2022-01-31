@@ -90,6 +90,13 @@ class Graph {
 
 
   // Main DFS method
+  // 1. Find Minimum spanning tree
+  // 2. Detect Cycles in graph.
+  // 3. Graph Bipartite
+  // 4. find strongly connected components.
+  // 5. Topologically sort nodes.
+  // 6. find bridges and articulation points.
+  // 7. Generate Mazes.
   dfs(startingNode) {
 
     var visited = {};
