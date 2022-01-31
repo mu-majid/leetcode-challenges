@@ -51,22 +51,23 @@ class Graph {
   }
 
   // function to performs BFS
+  // Better for shortest path for unweighted graphs
+  // O(Vert + Edges)
   bfs(startingNode) {
 
     // create a visited object
     var visited = {};
 
     // Create an object for queue
-    var q = new Queue();
-
     // add the starting node to the queue
+    var q = [startingNode];
+
     visited[startingNode] = true;
-    q.enqueue(startingNode);
 
     // loop until queue is empty
-    while (!q.isEmpty()) {
+    while (!q.length) {
       // get the element from the queue
-      var getQueueElement = q.dequeue();
+      var getQueueElement = q.shift();
 
       // passing the current vertex to callback function
       console.log(getQueueElement);
@@ -81,12 +82,37 @@ class Graph {
 
         if (!visited[neighbour]) {
           visited[neighbour] = true;
-          q.enqueue(neighbour);
+          q.push(neighbour);
         }
       }
     }
+
+    // we could return visited obj
   }
-  // dfs(v)
+
+
+  // Main DFS method
+  dfs(startingNode) {
+
+    var visited = {};
+
+    this.DFSUtil(startingNode, visited);
+  }
+
+  // Recursive function which process and explore
+  // all the adjacent vertex of the vertex with which it is called
+  DFSUtil(vert, visited) {
+    visited[vert] = true;
+    console.log(vert);
+
+    var get_neighbours = this.AdjList.get(vert);
+
+    for (var i in get_neighbours) {
+      var get_elem = get_neighbours[i];
+      if (!visited[get_elem])
+        this.DFSUtil(get_elem, visited);
+    }
+  }
 }
 
 module.exports = { Graph }
