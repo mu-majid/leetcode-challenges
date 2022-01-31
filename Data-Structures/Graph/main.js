@@ -20,3 +20,9 @@ g.addEdge('E', 'C');
 g.addEdge('C', 'F');
 
 g.printGraph();
+
+console.log('BFS : \n', g.bfs('A'));
+
+console.log('DFS : \n', g.dfs('A'));
+
+console.log('BFS ShortesPath: \n', g.breadthFirstShortestPath('A', 'C'));
