@@ -119,6 +119,8 @@ class Graph {
     }
   }
 
+
+  // One important observation about BFS is, the path used in BFS always has least number of edges between any two vertices
   breadthFirstShortestPath(startNode, targetNode) {
   // check if startNode & targetNode are identical
   if (startNode === targetNode) {
