@@ -48,6 +48,8 @@ class Graph {
 
     console.log(parents);
     console.log(distances);
+
+    return { distances, parents };
   }
 
   vertexWithMinDistance(distances, visited) {
