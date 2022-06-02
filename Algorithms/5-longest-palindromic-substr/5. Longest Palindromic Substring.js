@@ -25,7 +25,9 @@ const longestPalindrome = (s) => {
 const expandAroundCenter = (s, left, right) => {
   if (s === null || left > right) return 0;
 
-  // Means that we start from middle and continue expanding only if we are in the string boundaries and also the characters match
+  // Means that we start from middle and 
+  // continue expanding only if we are in the string boundaries 
+  // and also the characters match
   while (left >= 0 && right < s.length && s[left] === s[right]) {
     left--;
     right++;
