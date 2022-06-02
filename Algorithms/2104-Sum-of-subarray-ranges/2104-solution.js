@@ -1,10 +1,12 @@
-/**
- * The idea is:
- * for each element in the array, find the No. of subarrays that element is a Max and a Min.
- * Answer = Sum(No. of subarrays elem is Max * elem) - Sum(No. of subarrays elem is Min * elem)
- */
-
- var subArrayRanges = function(nums) {
-
-
-}; 
+var subArrayRanges = function (nums) {
+  let sum = 0;
+  for (let i = 0; i < nums.length; i++) {
+    let max = -Infinity; let min = Infinity;
+    for (let j = i; j < nums.length; j++) {
+      min = Math.min(min, nums[j]);
+      max = Math.max(max, nums[j]);
+      sum += (max - min);
+    }
+  }
+  return sum;
+};
