@@ -50,6 +50,7 @@ const getPatterns = (arr) => {
   }
   const patterns = []
 
+  // complexity O(N*M)
   const dfs = (pattern, index, count) => {
     if (count > 3) {
       return
