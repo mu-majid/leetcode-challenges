@@ -14,21 +14,16 @@ const mostVisitedPattern = function (username, timestamp, website) {
     else return;
   });
 
-  console.log(userVisitsIndx)
-
   for (let i = 0; i < userVisitsIndx.length; i++) {
     let prevElem = userVisitsIndx[i - 1];
     let element = userVisitsIndx[i];
     let userVisits = i === 0 ? website.slice(0, element) : website.slice(prevElem, element)
 
-    let compPatterns = getPatternsCombinations(userVisits, PATTERN_LENGTH, []);
-    console.log(compPatterns)
+    let compPatterns = getPatterns(userVisits);
     compPatterns.forEach((pattern) => {
       patterns[pattern] = patterns[pattern] ? patterns[pattern] + 1 : 1
     });
   }
-
-  console.log(patterns)
 
   return patterns;
 };
@@ -43,15 +38,47 @@ const getPatternsCombinations = (array, minLen = PATTERN_LENGTH, prevArray = [])
     const element = array[i];
     let prevArrExtended = [...prevArray];
     prevArrExtended.push(element);
-    combs.concat(getPatternsCombinations(array.slice(i+1), minLen, prevArrExtended));
+    combs.concat(getPatternsCombinations(array.slice(i + 1), minLen, prevArrExtended));
   }
 
   return combs;
 }
 
+const getPatterns = (arr) => {
+  if (arr.length < 3) {
+    return []
+  }
+  const patterns = []
+
+  const dfs = (pattern, index, count) => {
+    if (count > 3) {
+      return
+    }
+    if (count === 3) {
+      patterns.push(pattern)
+      return
+    }
+
+    for (let i = index; i < arr.length; i++) {
+      dfs([...pattern, arr[i]], i + 1, count + 1)
+    }
+  }
+
+  dfs([], 0, 0)
+
+  return patterns
+}
+
+// console.log(mostVisitedPattern(
+//   ["joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary"],
+//   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//   ["home", "about", "career", "home", "cart", "maps", "home", "home", "about", "career"]
+// ));
+
 console.log(mostVisitedPattern(
-  ["joe", "joe", "joe", "james", "james", "james", "james", "mary", "mary", "mary"],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  ["home", "about", "career", "home", "cart", "maps", "home", "home", "about", "career"]
+  ["ua","ua","ua","ub","ub","ub"],
+  [1,2,3,4,5,6],
+  ["a","b","a","a","b","c"]
 ));
+
 
