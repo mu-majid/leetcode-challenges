@@ -12,3 +12,7 @@ function getMaxLen(nums) {
   }
   return max;
 }
+
+/**
+ * Intuition is nicely described here: https://www.youtube.com/watch?v=FqpfLr76a1k
+ */
