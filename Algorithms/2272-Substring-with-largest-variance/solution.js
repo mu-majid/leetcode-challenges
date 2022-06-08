@@ -15,7 +15,7 @@ var largestVariance = function (s) {
     for (let y = 97; y <= 122; y++) {
       let j = String.fromCharCode(y);
       if (i === j || map.get(i) === 0 || map.get(j) === 0) continue;
-      for (let rev = 1; rev <= 2; rev++) {
+      for (let rev = 1; rev <= 2; rev++) { // rev for reverse string
         let cnt1 = 0, // max -> char is 1
           cnt2 = 0;   // min -> char is -1
         for (const c of s) {
