@@ -24,6 +24,7 @@ var largestVariance = function (s) {
           if (cnt1 < cnt2) cnt1 = cnt2 = 0; // considering cnt1 is always greatwer than cnt2 - start a new substring if cnt1 < cnt2 (Kadane's algorithm)
           if (cnt1 > 0 && cnt2 > 0) ans = Math.max(ans, cnt1 - cnt2);
         }
+        // handling a corner case like 'abbbbb'
         s = s.split('').reverse().join('');
       }
     }
