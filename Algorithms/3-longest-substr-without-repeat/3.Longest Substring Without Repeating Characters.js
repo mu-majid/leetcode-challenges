@@ -2,6 +2,9 @@
  * @param {string} s
  * @return {number}
  */
+
+// Sliding window problem
+
 var lengthOfLongestSubstring = function (s) {
   const strLen = s.length;
   const visitedCharIndexMap = {};
