@@ -23,9 +23,6 @@ class Solution:
             p1 = (lo + hi) // 2
             p2 = left_partition_size - p1
 
-            # print(f"NUMS1 : {nums1[:p1]} | {nums1[p1:]}")
-            # print(f"NUMS2 : {nums2[:p2]} | {nums2[p2:]}")
-
             # GET THE 4 BOUNDARY NUMBERS
             nums1_left = nums1[p1 - 1] if p1 > 0 else INT_MIN
             nums1_right = nums1[p1] if p1 < len(nums1) else INT_MAX
