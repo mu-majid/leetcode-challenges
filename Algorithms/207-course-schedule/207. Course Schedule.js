@@ -25,7 +25,6 @@ const buildGraphFromEdges = (vertices, edges) => {
 }
 var canFinish = function (numCourses, edges) {
   const graphAdjList = buildGraphFromEdges(numCourses, edges);
-  console.log(graphAdjList)
 
   // Calcuate the incoming degree of each vertex
   const vertices = Object.keys(graphAdjList);
@@ -40,9 +39,6 @@ var canFinish = function (numCourses, edges) {
   const queue = vertices.filter((v) => !inDegree[v]);
   const topNums = {};
   let index = 0;
-  console.log('vertices > ',vertices)
-  console.log('inDegree > ',inDegree)
-  console.log('queue > ',queue)
 
   while (queue.length) {
     const v = queue.shift();

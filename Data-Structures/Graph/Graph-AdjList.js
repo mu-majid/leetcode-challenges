@@ -108,7 +108,6 @@ class Graph {
   // all the adjacent vertex of the vertex with which it is called
   DFSUtil(vert, visited) {
     visited[vert] = true;
-    console.log('>',vert);
 
     var get_neighbours = this.AdjList.get(vert);
 

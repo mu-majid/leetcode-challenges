@@ -45,10 +45,6 @@ class Graph {
       visited.add(currVertex);
       currVertex = this.vertexWithMinDistance(distances, visited);
     }
-
-    console.log(parents);
-    console.log(distances);
-
     return { distances, parents };
   }
 
