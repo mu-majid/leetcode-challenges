@@ -6,6 +6,7 @@ For this problem, a height-balanced binary tree is defined as a binary tree in w
 
 Example 1:
 
+    `See image in same folder`
 
     Input: head = [-10,-3,0,5,9]
     Output: [0,-3,9,-10,null,5]
