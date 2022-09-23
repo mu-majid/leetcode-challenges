@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 class TrieNode:
     def __init__(self):
         self.children = defaultdict(TrieNode)
