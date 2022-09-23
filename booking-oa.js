@@ -101,7 +101,9 @@ function findLargestSquareSize(samples) {
    * 1 1
    * 1 2
    */
-  const dynProgArr = Array.from(Array(rows), _ => Array(columns).fill(0));
+  const dynProgArr = Array.from(
+    Array(rows), _ => Array(columns).fill(0)
+  );
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < columns; j++) {
